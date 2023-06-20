@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+.main
+{
+    background: #F5F5F5;
+    min-height: 100vh;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    
+}
+.menubtn
+{
+position: absolute;
+top: 30px;
+left: 20px;
+width: 30px;
+}
+.menubtn>img
+{
+    width: 100%;
+    object-fit: contain;
+}
+.cinput{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 50%;
+    position: relative;
+   
+}
+.chatSec
+{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.empty
+{
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size:1.2rem;
+text-align: center;
+width: 60%;
+color: rgba(77, 44, 35, 0.8);
+margin: auto;
+}
+.cinput>input
+{
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size:1.2rem;
+
+
+width: 100%;
+color: rgba(77, 44, 35, 0.8);
+background: #FFFFFF;
+box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.25);
+border-radius: 20px;
+padding: 5px 20px;
+border: transparent;
+height: 3rem;
+}
+.v1
+{
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+.cinput>img
+{
+    position: absolute;
+    z-index: 10;
+    right: 10px;
+    width: 30px;;
+}
+.cinput>img:hover
+{
+   filter: brightness(0);
+}
+
+.menu
+{
+background: #BC5E0E;
+height: 100vh;
+width: min(20%,350px);
+display: flex;
+flex-direction: column;
+}
+.new
+{
+    margin-top: min(5vh,20px);
+
+    display: flex;
+    justify-content: start;
+    padding: 10px 20px;
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 1rem;
+border: 1px solid #FFFFFF;
+border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+color: #FFFFFF;
+
+    align-items: center;
+}
+.new>img{
+    width: 20px;
+    margin-right: 20px;
+}
+.prev>img{
+    width: 15px;
+    margin-right: 10px;
+}
+.prev{
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 0.9rem;
+overflow: hidden;
+color: white;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+max-width: 250px;
+display: flex;
+justify-content: flex-start;
+align-items: center;
+
+}
+.his
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    height: 70vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
