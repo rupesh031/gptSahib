@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from "react";
 import style from "./login.module.css";
 import { Link } from "react-router-dom";
-import { signInWithGoogle } from "../services/firebase";
+import {
+  signInWithEmailPassword,
+  signInWithGoogle,
+} from "../services/firebase";
 
 function Login() {
   const [email, setEmail] = useState();
   const [pass, setpass] = useState();
   const [sucess, setSucess] = useState(false);
+  const [error, setError] = useState("");
   const google = async () => {
     await signInWithGoogle({ setSucess: setSucess });
+  };
+  const emailLog = async () => {
+    if (email != "" && pass != "")
+      await signInWithEmailPassword(email, pass, setSucess, setError);
+    else setError("Invalid Creds");
   };
   useEffect(() => {
     if (sucess) {
       window.location = "/";
     }
-  }, [sucess]);
+    console.log(error);
+  }, [sucess, error]);
   return (
     <div className={style.main}>
       <div className={style.sec1}>
@@ -44,7 +54,9 @@ function Login() {
         </div>
         <div className={style.forgot}>Forgot password?</div>
 
-        <button className={style.logbtn}>Login</button>
+        <button className={style.logbtn} onClick={emailLog}>
+          Login
+        </button>
 
         <button className={style.google} onClick={google}>
           {" "}

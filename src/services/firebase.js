@@ -12,20 +12,26 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-export async function signUpWithEmailPassword(email, password, name) {
+export async function signUpWithEmailPassword({
+  email,
+  password,
+  name,
+  setSucess,
+  setError,
+}) {
   try {
     const userCredential = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password);
 
     await sendEmailVerification();
-
+    setError("Verify Mail");
     const user = userCredential.user;
     await createUserDocument(user.uid, name, email);
-
+    setSucess(true);
     return user;
   } catch (error) {
-    throw error;
+    setError(error.message);
   }
 }
 
@@ -38,13 +44,23 @@ export async function sendEmailVerification() {
   }
 }
 
-export async function signInWithEmailPassword(email, password) {
+export async function signInWithEmailPassword(
+  email,
+  pass,
+  setSucess,
+  setError
+) {
   try {
+    console.log("hello");
     const userCredential = await firebase
       .auth()
-      .signInWithEmailAndPassword(email, password);
+      .signInWithEmailAndPassword(email, pass);
+    setSucess(true);
+    localStorage.setItem("login", "true");
+    console.log("hello");
     return userCredential.user;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 }

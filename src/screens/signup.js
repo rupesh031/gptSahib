@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./login.module.css";
 import { Link } from "react-router-dom";
+import { signUpWithEmailPassword } from "../services/firebase";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -8,7 +9,7 @@ function Signup() {
   const [name, setName] = useState("");
   const [conf, setconf] = useState("");
   const [error, setError] = useState("");
-  const [sucess, setSucess] = useState("");
+  const [sucess, setSucess] = useState(false);
 
   const submit = () => {
     if (name == "") setError("Name Required");
@@ -17,9 +18,24 @@ function Signup() {
     else {
       //firebase Signup
       setError("");
+      emailSignup();
     }
   };
-  useEffect(() => {}, [sucess]);
+
+  const emailSignup = async () => {
+    await signUpWithEmailPassword({
+      email: email,
+      name: name,
+      password: pass,
+      setSucess: setSucess,
+      setError: setError,
+    });
+  };
+  useEffect(() => {
+    if (sucess) {
+      window.location = "/";
+    }
+  }, [sucess, error]);
 
   return (
     <div className={style.main}>
