@@ -127,15 +127,16 @@ color: #FFFFFF;
 font-style: normal;
 font-weight: 500;
 font-size: 0.9rem;
-overflow: hidden;
 color: white;
 white-space: nowrap;
-overflow: hidden;
 text-overflow: ellipsis;
 max-width: 250px;
 display: flex;
 justify-content: flex-start;
 align-items: center;
+width: 70%;
+max-width: 70%;
+margin-bottom: 30px;
 
 }
 .his
@@ -143,9 +144,57 @@ align-items: center;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
-    height: 70vh;
-    overflow: auto;
+    max-height: 80vh;
+   overflow: auto;
+    width: 90%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    padding: 20px 3%;
+    border: #ffffff 2px solid;
+}
+.his::-webkit-scrollbar
+{
+    
+    width: 5px;
+    color: grey;
+}
+
+.bottom
+{
+    margin-top: auto;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ul
+{
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 1px;
+    width: 100%;
+    background: #ffffff;
+    margin-bottom: 10px;
+}
+.prof
+{
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 1rem;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #FFFFFF;
+margin-bottom: 10px;
+
+}
+
+.prof>img
+{
+    width: 15px;
+    object-fit: contain;
+    margin-right: 10px;
 }

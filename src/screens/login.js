@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./login.module.css";
 import { Link } from "react-router-dom";
+import { signInWithGoogle } from "../services/firebase";
 
 function Login() {
   const [email, setEmail] = useState();
   const [pass, setpass] = useState();
-
+  const [sucess, setSucess] = useState(false);
+  const google = async () => {
+    await signInWithGoogle({ setSucess: setSucess });
+  };
+  useEffect(() => {
+    if (sucess) {
+      window.location = "/";
+    }
+  }, [sucess]);
   return (
     <div className={style.main}>
       <div className={style.sec1}>
@@ -34,8 +43,10 @@ function Login() {
           ></input>
         </div>
         <div className={style.forgot}>Forgot password?</div>
+
         <button className={style.logbtn}>Login</button>
-        <button className={style.google}>
+
+        <button className={style.google} onClick={google}>
           {" "}
           <img src="images/google.png"></img> Continue with Google
         </button>

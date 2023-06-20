@@ -51,9 +51,25 @@ function ChatPage() {
           New question
         </div>
         <div className={style.his}>
-          <div className={style.prev}>
-            <img src="images/msg.png"></img>
-            Searched lorespusmfsafsafsafsa
+          {history.map((ele) => {
+            return (
+              <div className={style.prev}>
+                <img src="images/msg.png"></img>
+                {ele.head}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className={style.bottom}>
+          <div className={style.ul}></div>
+          <div className={style.prof}>
+            <img src="images/ac.png"></img>
+            Priyansh Khotari
+          </div>
+          <div className={style.prof}>
+            <img src="images/upgrade.png" style={{ height: "15px" }}></img>
+            Upgrade Account
           </div>
         </div>
       </div>

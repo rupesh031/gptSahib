@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./main.module.css";
 import Card1 from "./card1";
+import { Link } from "react-router-dom";
 
 function Main() {
+  const [login, setLogin] = useState();
+  useEffect(() => {
+    setLogin(localStorage.getItem("login"));
+  }, [login]);
+
   return (
     <div className={style.main}>
       <div className={style.nav}>
@@ -13,8 +19,30 @@ function Main() {
           <div className={style.ele}>FAQ</div>
         </div>
         <div className={style.nav2}>
-          <div className={style.ele}>Login</div>
-          <div className={style.signup}>Signup </div>
+          {login == "true" ? (
+            <>
+              {" "}
+              <Link to="/login" style={{ textDecoration: "none" }}>
+                <div className={style.ele}>Login</div>
+              </Link>
+              <Link to="/signup" style={{ textDecoration: "none" }}>
+                <div className={style.signup}>Signup </div>
+              </Link>
+            </>
+          ) : (
+            <>
+              {" "}
+              <div
+                className={style.ele}
+                onClick={() => {
+                  setLogin("false");
+                  localStorage.setItem("login", "true");
+                }}
+              >
+                Logout
+              </div>
+            </>
+          )}
         </div>
       </div>
       <div className={style.sec1}>
@@ -29,9 +57,12 @@ function Main() {
             Sikh culture and language
           </div>
           <div className={style.try}>
-            <div className={style.try1}>
-              Try Free <img src="images/up.png"></img>
-            </div>
+            <Link to={"/chat"} style={{ textDecoration: "none" }}>
+              <div className={style.try1}>
+                Try Free <img src="images/up.png"></img>
+              </div>
+            </Link>
+
             <div className={style.try2}> Read about us</div>
           </div>
         </div>

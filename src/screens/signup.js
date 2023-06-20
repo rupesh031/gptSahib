@@ -8,6 +8,7 @@ function Signup() {
   const [name, setName] = useState("");
   const [conf, setconf] = useState("");
   const [error, setError] = useState("");
+  const [sucess, setSucess] = useState("");
 
   const submit = () => {
     if (name == "") setError("Name Required");
@@ -18,7 +19,7 @@ function Signup() {
       setError("");
     }
   };
-  //   useEffect({}, [error]);
+  useEffect(() => {}, [sucess]);
 
   return (
     <div className={style.main}>
