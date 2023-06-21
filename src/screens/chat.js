@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./chat.module.css";
+import { getUserByObjectId } from "../services/firebase";
 
 function ChatPage() {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
+
+  const [user, Setuser] = useState({});
   const [menu, setMenu] = useState(false);
   const history = [
     { head: " Searched lorespusmfsafsafsafsa" },
@@ -28,6 +31,11 @@ function ChatPage() {
       // Call API or function to handle ChatGPT's response here
     }
   };
+  useEffect(() => {
+    const id = localStorage.getItem("id");
+    if (id != null && id != "")
+      getUserByObjectId({ setUser: Setuser, objectId: id });
+  }, []);
 
   return (
     <div className={style.main}>
@@ -65,7 +73,7 @@ function ChatPage() {
           <div className={style.ul}></div>
           <div className={style.prof}>
             <img src="images/ac.png"></img>
-            Priyansh Khotari
+            {user.name}
           </div>
           <div className={style.prof}>
             <img src="images/upgrade.png" style={{ height: "15px" }}></img>

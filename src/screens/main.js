@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 
 function Main() {
   const [login, setLogin] = useState();
+
   useEffect(() => {
     setLogin(localStorage.getItem("login"));
   }, [login]);
+  console.log(login);
 
   return (
     <div className={style.main}>
@@ -19,7 +21,7 @@ function Main() {
           <div className={style.ele}>FAQ</div>
         </div>
         <div className={style.nav2}>
-          {login == "true" ? (
+          {login == false || login == "false" || login == null ? (
             <>
               {" "}
               <Link to="/login" style={{ textDecoration: "none" }}>
@@ -35,8 +37,9 @@ function Main() {
               <div
                 className={style.ele}
                 onClick={() => {
-                  setLogin("false");
-                  localStorage.setItem("login", "true");
+                  localStorage.setItem("login", "false");
+                  localStorage.removeItem("id");
+                  setLogin(false);
                 }}
               >
                 Logout
@@ -47,7 +50,7 @@ function Main() {
       </div>
       <div className={style.sec1}>
         <div className={style.bg1}>
-          <img src="images/bg1.png"></img>
+          <img src="images/main.png"></img>
         </div>
         <div className={style.content}>
           <div className={style.header}>GPT SAHIB</div>
@@ -57,7 +60,10 @@ function Main() {
             Sikh culture and language
           </div>
           <div className={style.try}>
-            <Link to={"/chat"} style={{ textDecoration: "none" }}>
+            <Link
+              to={login == true || login == "true" ? "/chat" : "/login"}
+              style={{ textDecoration: "none" }}
+            >
               <div className={style.try1}>
                 Try Free <img src="images/up.png"></img>
               </div>
@@ -68,14 +74,14 @@ function Main() {
         </div>
       </div>
       <div className={style.sec2}>
-        <div className={style.bg2}>
+        {/* <div className={style.bg2}>
           <img src="images/bg2.png"></img>
-        </div>
+        </div> */}
         <div
           className={style.header}
           style={{
             marginTop: "80px",
-            color: "white",
+            color: "#7E440F",
             textShadow: "none",
             fontSize: "40px",
           }}

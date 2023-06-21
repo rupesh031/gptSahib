@@ -31,7 +31,7 @@ export async function signUpWithEmailPassword({
     setSucess(true);
     return user;
   } catch (error) {
-    setError(error.message);
+    errorSet({ setError: setError, errorCode: error.code });
   }
 }
 
@@ -56,12 +56,12 @@ export async function signInWithEmailPassword(
       .auth()
       .signInWithEmailAndPassword(email, pass);
     setSucess(true);
-    localStorage.setItem("login", "true");
-    console.log("hello");
-    return userCredential.user;
+    const user = userCredential.user;
+    localStorage.setItem("id", user.uid);
   } catch (error) {
     console.log(error);
-    throw error;
+    errorSet({ setError: setError, errorCode: error.code });
+    // throw error;
   }
 }
 
@@ -88,10 +88,70 @@ export async function signInWithGoogle({ setSucess }) {
     const email = user.email;
     await createUserDocument(user.uid, name, email);
 
-    console.log("Sign up with Google successful");
     setSucess(true);
+    localStorage.setItem("id", user.uid);
   } catch (error) {
     console.log(error.message);
     setSucess(false);
+  }
+}
+export const getUserByObjectId = async ({ objectId, setUser }) => {
+  try {
+    const userRef = firebase.firestore().collection("users").doc(objectId);
+    const userDoc = await userRef.get();
+
+    if (userDoc.exists) {
+      const userData = userDoc.data();
+
+      setUser({
+        id: userDoc.id,
+        ...userData,
+      });
+    } else {
+      setUser({ error: "User not found" });
+      // throw new Error("User not found");
+    }
+  } catch (error) {
+    console.log(error.message);
+    setUser({ error: error.message });
+  }
+};
+
+function errorSet({ setError, errorCode }) {
+  switch (errorCode) {
+    case "auth/invalid-email":
+      setError("Invalid email address.");
+      break;
+    case "auth/user-disabled":
+      setError("This user account has been disabled.");
+      break;
+    case "auth/user-not-found":
+      setError("User not found.");
+      break;
+    case "auth/wrong-password":
+      setError("Incorrect password.");
+      break;
+    case "auth/email-already-in-use":
+      setError("Email address is already in use.");
+      break;
+    case "auth/weak-password":
+      setError("The password is too weak.");
+      break;
+    case "auth/popup-closed-by-user":
+      setError("The sign-in popup was closed by the user.");
+      break;
+    case "auth/popup-blocked":
+      setError("The sign-in popup was blocked by the browser.");
+      break;
+    case "auth/operation-not-supported-in-this-environment":
+      setError("This operation is not supported in the current environment.");
+      break;
+    case "auth/invalid-verification-code":
+      setError("The verification code is invalid.");
+      break;
+
+    default:
+      setError(errorCode);
+      break;
   }
 }

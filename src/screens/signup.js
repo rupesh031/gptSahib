@@ -33,7 +33,7 @@ function Signup() {
   };
   useEffect(() => {
     if (sucess) {
-      window.location = "/";
+      window.location = "/login";
     }
   }, [sucess, error]);
 

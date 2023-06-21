@@ -21,6 +21,7 @@ function Login() {
   };
   useEffect(() => {
     if (sucess) {
+      localStorage.setItem("login", "true");
       window.location = "/";
     }
     console.log(error);
@@ -62,6 +63,17 @@ function Login() {
           {" "}
           <img src="images/google.png"></img> Continue with Google
         </button>
+        {error != "" ? (
+          <div
+            className={style.noacc}
+            style={{ color: "red", textDecoration: "none", marginTop: "10px" }}
+          >
+            {error}
+          </div>
+        ) : (
+          <></>
+        )}
+
         <div className={style.noacc}>
           {" "}
           <Link to="/signup" style={{ color: "#7E440F" }}>
