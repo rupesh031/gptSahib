@@ -64,7 +64,7 @@ function Main() {
       </div>
       <div className={style.sec1}>
         <div className={style.bg1}>
-          <img src="images/main.png"></img>
+          <img src="images/main2.png"></img>
         </div>
         <div className={style.content}>
           <div className={style.header}>GPT SAHIB</div>
