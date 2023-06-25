@@ -5,6 +5,20 @@ import { Link } from "react-router-dom";
 
 function Main() {
   const [login, setLogin] = useState();
+  const cardsl = [
+    {
+      header: "Guru Granth Sahib Ji",
+      para: "Learn and understand the teachings of all the Gurus by comprehending Guru Granth Sahib Ji.",
+    },
+    {
+      header: "Sikh Culture & History",
+      para: " Learn about various Historical events, location of Gurudwaras worldwide and biographies of all the Gurus.",
+    },
+    {
+      header: "Punjabi Language",
+      para: "Learn the Sikh's language Punjabi at an amateur, advanced and professional level for students at school and university level.",
+    },
+  ];
 
   useEffect(() => {
     setLogin(localStorage.getItem("login"));
@@ -90,9 +104,9 @@ function Main() {
           what we offer
         </div>
         <div className={style.cardSec}>
-          <Card1 />
-          <Card1 />
-          <Card1 />
+          {cardsl.map((val) => {
+            return <Card1 header={val.header} para={val.para} />;
+          })}
         </div>
       </div>
     </div>

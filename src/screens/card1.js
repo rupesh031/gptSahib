@@ -1,19 +1,16 @@
 import React from "react";
 import style from "./main.module.css";
 
-function Card1() {
+function Card1({ header, para }) {
   return (
     <div className={style.card}>
       <div className={style.card1}>
         <img src="images/card1.png"></img>
       </div>
       <div className={style.card2}>
-        <div style={{ fontSize: "20px" }}> Guru Granth Sahib Ji</div>
+        <div style={{ fontSize: "20px" }}>{header}</div>
         <br></br>
-        <div>
-          Learn and understand the teachings of all the Gurus by comprehending
-          Guru Granth Sahib Ji.
-        </div>
+        <div>{para}</div>
       </div>
     </div>
   );
