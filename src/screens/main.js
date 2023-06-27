@@ -62,7 +62,7 @@ function Main() {
           )}
         </div>
       </div>
-      <div className={style.sec1}>
+      <div className={style.sec1} id="home">
         <div className={style.bg1}>
           <img src="images/main2.png"></img>
         </div>
@@ -82,8 +82,9 @@ function Main() {
                 Try Free <img src="images/up.png"></img>
               </div>
             </Link>
-
-            <div className={style.try2}> Read about us</div>
+            <a href="#about" style={{ textDecoration: "none" }}>
+              <div className={style.try2}> Read about us</div>
+            </a>{" "}
           </div>
         </div>
       </div>
@@ -107,6 +108,50 @@ function Main() {
           {cardsl.map((val) => {
             return <Card1 header={val.header} para={val.para} />;
           })}
+        </div>
+      </div>
+      <div className={style.about} id="about">
+        <div className={style.im}>
+          <img src="images/main3.png"></img>
+        </div>
+        <div className={style.content1}>
+          <div className={style.header}>ABOUT US</div>
+          <div className={style.con1}>
+            {" "}
+            GPT Sahib is an AI-powered chatbot designed to represent and
+            comprehend the teachings of Guru Granth Sahib Ji, the sacred
+            scripture of Sikhism. It aims to educate users about Sikhism and
+            promote the Punjabi language. By utilizing artificial intelligence,
+            GPT Sahib offers an interactive platform for individuals from
+            diverse backgrounds to explore and understand Sikhism. It provides
+            accurate and insightful responses to queries about the sacred texts,
+            historical events, and principles of the faith. Additionally, GPT
+            Sahib serves as an educational resource for learning Punjabi,
+            enabling users to engage with Sikh teachings in their original
+            language. The chatbot's ultimate goal is to promote inclusivity,
+            cultural understanding, and global knowledge dissemination about
+            Sikhism.
+          </div>
+        </div>
+      </div>
+
+      <div className={style.bot}>
+        <div className={style.nlogo}>
+          <img src="images/logo1.png"></img>
+        </div>
+        <div className={style.nave}>
+          <div className={style.navhead}>Explore</div>
+          <a href="#home">Home</a>
+          <a href="#about">About Us</a>
+          <a>FAQ</a>
+          <a>Contact</a>
+        </div>
+        <div className={style.nave}>
+          <div className={style.navhead}>Product</div>
+          <a>Pricing</a>
+          <a href={login == true || login == "true" ? "/chat" : "/login"}>
+            Try Free
+          </a>
         </div>
       </div>
     </div>

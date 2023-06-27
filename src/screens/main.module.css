@@ -226,3 +226,105 @@ color: #000000;
 text-shadow: 0px 4px 20px rgba(255, 203, 69, 0.5);
 
 }
+
+.about
+{
+   background: rgb(255, 202, 69);
+
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+.im
+{
+    position: absolute;
+    bottom: -4vh;
+    width: 100%;
+}
+.im>img{
+  
+    width: 100%;
+  
+}
+
+.content1
+{
+    margin-top: 15vh;
+    position: relative;
+    z-index: 10;
+    width: min(60%,800px);
+    margin-left:max(3%,70px);
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+  
+    font-family: 'Montserrat';
+    font-style: normal;
+
+
+color: #FFFFFF;
+
+text-shadow: 0px 4px 25px rgba(255, 203, 69, 0.5);
+margin-bottom: 5vh;
+}
+.con1{
+    margin-top: 10px;
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 600;
+font-size: 1.2rem;
+color: #FFFFFF;
+}
+.bot
+{
+    width: 100%;
+    height: min(40vh,300px);
+    background: #000000;
+    display: flex;
+    font-family: 'Montserrat';
+    overflow: hidden;
+   
+
+}
+.nlogo
+{
+    position: relative;
+    height: 40px;
+    width: 40px;
+    margin-left: 20px;
+    margin-right:20px;
+    margin-top: 20px;
+    width: 20%;
+}
+.nlogo>img{
+    
+    object-fit: contain;
+}
+
+.nave{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 100%;
+    align-items: flex-start;
+   margin-top: 5vh;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+.navhead
+{
+    color: #FFF;
+font-size: 32px;
+
+font-weight: 700;
+margin-bottom: 30px;
+}
+.nave>a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.80);
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 10px;
+    cursor: pointer;
+}

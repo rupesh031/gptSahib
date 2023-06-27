@@ -117,6 +117,20 @@ export const getUserByObjectId = async ({ objectId, setUser }) => {
   }
 };
 
+export const sendPasswordResetEmail = ({ email, setError }) => {
+  firebase
+    .auth()
+    .sendPasswordResetEmail(email)
+    .then(() => {
+      setError("Password reset email sent successfully");
+      // console.log("Password reset email sent successfully");
+    })
+    .catch((error) => {
+      // console.error("Error sending password reset email:", error);
+      errorSet({ setError: setError, errorCode: error.code });
+    });
+};
+
 function errorSet({ setError, errorCode }) {
   switch (errorCode) {
     case "auth/invalid-email":

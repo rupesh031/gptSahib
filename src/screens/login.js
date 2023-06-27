@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "./login.module.css";
 import { Link } from "react-router-dom";
 import {
+  sendPasswordResetEmail,
   signInWithEmailPassword,
   signInWithGoogle,
 } from "../services/firebase";
@@ -53,7 +54,18 @@ function Login() {
             }}
           ></input>
         </div>
-        <div className={style.forgot}>Forgot password?</div>
+        <div
+          className={style.forgot}
+          onClick={() => {
+            if (email != null && email.length != 0) {
+              sendPasswordResetEmail({ email: email, setError: setError });
+            } else {
+              setError("Please provide the email field");
+            }
+          }}
+        >
+          Forgot password?
+        </div>
 
         <button className={style.logbtn} onClick={emailLog}>
           Login
