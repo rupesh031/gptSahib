@@ -11,14 +11,17 @@ function Main() {
     {
       header: "Guru Granth Sahib Ji",
       para: "Learn and understand the teachings of all the Gurus by comprehending Guru Granth Sahib Ji.",
+      image: "images/card1.png",
     },
     {
       header: "Sikh Culture & History",
       para: " Learn about various Historical events, location of Gurudwaras worldwide and biographies of all the Gurus.",
+      image: "images/off2.webp",
     },
     {
       header: "Punjabi Language",
       para: "Learn the Sikh's language Punjabi at an amateur, advanced and professional level for students at school and university level.",
+      image: "images/off3.webp",
     },
   ];
 
@@ -168,7 +171,9 @@ function Main() {
         </div>
         <div className={style.cardSec}>
           {cardsl.map((val) => {
-            return <Card1 header={val.header} para={val.para} />;
+            return (
+              <Card1 header={val.header} para={val.para} images={val.image} />
+            );
           })}
         </div>
       </div>

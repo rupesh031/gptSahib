@@ -210,21 +210,26 @@ border-radius: 25px;
 min-height: 400px;
 box-shadow: 5px 5px 4px 3px #a5a5a5;
 }
+.card1
+{
+    height: 220px;
+    width:300px; ;
+    border-radius: 20px;
+}
 .card1>img{
     width: 100%;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 25px 25px 0px 0px;
 }
 .card2
 {
-    padding: 20px;
-    font-family: 'Montserrat';
+padding: 20px;
+font-family: 'Montserrat';
 font-style: normal;
 font-weight: 600;
 font-size: 16px;
-
-
 color: #000000;
-
 text-shadow: 0px 4px 20px rgba(255, 203, 69, 0.5);
 
 }
@@ -232,7 +237,6 @@ text-shadow: 0px 4px 20px rgba(255, 203, 69, 0.5);
 .about
 {
    background: rgb(255, 202, 69);
-
     position: relative;
     height: 100vh;
     overflow: hidden;
@@ -256,26 +260,22 @@ text-shadow: 0px 4px 20px rgba(255, 203, 69, 0.5);
     z-index: 10;
     width: min(60%,800px);
     margin-left:max(3%,70px);
-   height: 100vh;
-   display: flex;
-   flex-direction: column;
-  
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
     font-family: 'Montserrat';
     font-style: normal;
-
-
-color: #FFFFFF;
-
-text-shadow: 0px 4px 25px rgba(255, 203, 69, 0.5);
-margin-bottom: 5vh;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 25px rgba(255, 203, 69, 0.5);
+    margin-bottom: 5vh;
 }
 .con1{
     margin-top: 10px;
     font-family: 'Montserrat';
-font-style: normal;
-font-weight: 600;
-font-size: 1.2rem;
-color: #FFFFFF;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #FFFFFF;
 }
 .bot
 {
@@ -285,8 +285,6 @@ color: #FFFFFF;
     display: flex;
     font-family: 'Montserrat';
     overflow: hidden;
-   
-
 }
 .nlogo
 {
