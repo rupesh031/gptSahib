@@ -428,7 +428,7 @@ padding:10px  0px ;
 {
     width: 50%;
     height: 100vh;
-    background-image: -webkit-linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%);
+    background: linear-gradient(270deg, #F5F3D4 0%, rgba(217, 217, 217, 0.47) 66.56%, rgba(217, 217, 217, 0.00) 100%);
 }
 .bgContact>img
 {
@@ -444,7 +444,7 @@ padding: 20px 3%;
 display: flex;
 flex-direction: column;
 align-items: center;
-background-image: -webkit-linear-gradient(to left, rgb(123, 147, 27) 0%, rgb(231, 246, 98) 100%);
+
 }
 .contact1
 {
