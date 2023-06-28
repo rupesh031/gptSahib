@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import style from "./main.module.css";
 import Card1 from "./card1";
 import { Link } from "react-router-dom";
+import PricingCard from "./card2";
+import Faq from "./faq";
 
 function Main() {
   const [login, setLogin] = useState();
@@ -20,6 +22,60 @@ function Main() {
     },
   ];
 
+  const cards2 = [
+    {
+      head: "Amature",
+      points: [
+        "Basic learning of language",
+        "Phrases of Guru Granth Sahib Ji",
+        "Explore Sikh history",
+        "Lists of all Gurudwaras worldwide",
+      ],
+      color: "#BC5E0E",
+      path: "images/t1.png",
+      price: ["15$", "Per week"],
+    },
+    {
+      head: "Professional",
+      points: [
+        "Basic learning of language",
+        "Phrases of Guru Granth Sahib Ji",
+        "Explore Sikh history",
+        "Lists of all Gurudwaras worldwide",
+      ],
+      color: "#BDBDBD",
+      path: "images/t2.png",
+      price: ["45$", "Per 6 month"],
+    },
+    {
+      head: "Business",
+      points: [
+        "Basic learning of language",
+        "Phrases of Guru Granth Sahib Ji",
+        "Explore Sikh history",
+        "Lists of all Gurudwaras worldwide",
+      ],
+      color: "#CCA237",
+      path: "images/t3.png",
+      price: ["65$", "Per year"],
+    },
+  ];
+
+  const faqL = [
+    {
+      ques: "what is GPT Sahib ?",
+      ans: "It is an AI chat bot that answers your questions and helps college and school students to learn punjabi.",
+    },
+    {
+      ques: "Why is learning easy ?",
+      ans: "GPT Sahib is really easy to use. You just have to type in your question in the Question box and a resolution or an answer to your question would be presented within a few minutes as per the authenticised data collected on the holy Guru Granth Sahib ji and the Sikh history. ",
+    },
+    {
+      ques: "Why is it paid ?",
+      ans: "Extensive research has been done to provide you with autheticiated data on Sikh history. It enlightens you with the teachings of the holy Guru Granth Sahib Ji and Sikh history. It is a model to ensure that every sikh child is self enabled to learn punjabi and about it's culture &amp; heritage. The paid model helps you get guidance to your problems as per the holy Guru Granth Sahib ji and also teaches you the basics of punjabi langauage and as well as write papers on Sikh history or culture for you.",
+    },
+  ];
+
   useEffect(() => {
     setLogin(localStorage.getItem("login"));
   }, [login]);
@@ -29,10 +85,16 @@ function Main() {
     <div className={style.main}>
       <div className={style.nav}>
         <div className={style.nav1}>
-          <img src="images/logo.png"></img>{" "}
-          <div className={style.ele}>Pricing</div>
-          <div className={style.ele}>Contact </div>
-          <div className={style.ele}>FAQ</div>
+          <img src="images/logo.png"></img>
+          <a href="#pricing" className={style.ele}>
+            Pricing
+          </a>
+          <a href="#contact" className={style.ele}>
+            Contact{" "}
+          </a>
+          <a href="#faq" className={style.ele}>
+            FAQ
+          </a>
         </div>
         <div className={style.nav2}>
           {login == false || login == "false" || login == null ? (
@@ -134,6 +196,79 @@ function Main() {
           </div>
         </div>
       </div>
+      <div className={style.sec2} id="pricing">
+        <div
+          className={style.header}
+          style={{
+            marginTop: "80px",
+            color: "#7E440F",
+            textShadow: "none",
+            fontSize: "40px",
+          }}
+        >
+          {" "}
+          Pricing
+        </div>
+        <div className={style.cardSec}>
+          {cards2.map((val) => {
+            return <PricingCard card={val} />;
+          })}
+        </div>
+      </div>
+
+      <div id="contact" className={style.contact}>
+        <div className={style.bgContact}>
+          {" "}
+          <img src="images/contact.png"></img>
+        </div>
+        <div className={style.conMain}>
+          <div
+            className={style.header}
+            style={{
+              marginTop: "80px",
+              color: "#7E440F",
+              textShadow: "none",
+              fontSize: "40px",
+              textAlign: "center",
+            }}
+          >
+            {" "}
+            Contact
+          </div>
+          <div className={style.contact1}>
+            <input placeholder={"Name"}></input>
+            <input placeholder={"Email"}></input>
+          </div>
+          <textarea placeholder="Message"></textarea>
+          <div style={{ width: "80%" }}>
+            <button className={style.conSend}>Send</button>
+          </div>
+        </div>
+      </div>
+
+      <div className={style.faq} id="faq">
+        <div className={style.faqbg}>
+          <img src="images/faq.png"></img>
+        </div>
+        <div
+          className={style.header}
+          style={{
+            marginTop: "80px",
+            color: "white",
+            textShadow: "none",
+            fontSize: "40px",
+          }}
+        >
+          {" "}
+          FAQ'S
+        </div>
+
+        <div className={style.faqSec}>
+          {faqL.map((val) => {
+            return <Faq Faq={val} />;
+          })}
+        </div>
+      </div>
 
       <div className={style.bot}>
         <div className={style.nlogo}>
@@ -143,12 +278,12 @@ function Main() {
           <div className={style.navhead}>Explore</div>
           <a href="#home">Home</a>
           <a href="#about">About Us</a>
-          <a>FAQ</a>
-          <a>Contact</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact"> Contact</a>
         </div>
         <div className={style.nave}>
           <div className={style.navhead}>Product</div>
-          <a>Pricing</a>
+          <a href="#pricing">Pricing</a>
           <a href={login == true || login == "true" ? "/chat" : "/login"}>
             Try Free
           </a>

@@ -95,6 +95,7 @@ export async function signInWithGoogle({ setSucess }) {
     setSucess(false);
   }
 }
+
 export const getUserByObjectId = async ({ objectId, setUser }) => {
   try {
     const userRef = firebase.firestore().collection("users").doc(objectId);
@@ -114,6 +115,47 @@ export const getUserByObjectId = async ({ objectId, setUser }) => {
   } catch (error) {
     console.log(error.message);
     setUser({ error: error.message });
+  }
+};
+
+export const getHistory = async ({ objectId, setUser }) => {
+  try {
+    const userRef = firebase.firestore().collection("users").doc(objectId);
+    const userDoc = await userRef.get();
+
+    if (userDoc.exists) {
+      const userData = userDoc.data();
+
+      setUser({
+        id: userDoc.id,
+        ...userData,
+      });
+    } else {
+      setUser({ error: "User not found" });
+      // throw new Error("User not found");
+    }
+  } catch (error) {
+    console.log(error.message);
+    setUser({ error: error.message });
+  }
+};
+
+const fetchHistory = async ({ setHistory }) => {
+  try {
+    const snapshot = await firebase.firestore().collection("history").get();
+    const documents = snapshot.docs.map((doc) => doc.data());
+    setHistory(documents);
+  } catch (error) {
+    console.error("Error retrieving history:", error);
+  }
+};
+
+const addHistory = async ({ uid, data }) => {
+  try {
+    await firebase.firestore().collection("history").doc(uid).update(data);
+    console.log("Document updated successfully");
+  } catch (error) {
+    console.error("Error updating document:", error);
   }
 };
 

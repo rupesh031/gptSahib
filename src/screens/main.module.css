@@ -61,6 +61,7 @@ font-size: 20px;
 text-align: center;
 color: #FFFFFF;
 margin-left: 40px;
+text-decoration: none;
 cursor: pointer;
 }
 .ele:hover
@@ -207,6 +208,7 @@ width: 300px;
 background: linear-gradient(153.45deg, #FFFFFF 1.11%, rgba(255, 255, 255, 0.7) 36.76%, rgba(255, 255, 255, 0.7) 70.93%, #FFFFFF 96.19%);
 border-radius: 25px;
 min-height: 400px;
+box-shadow: 5px 5px 4px 3px #a5a5a5;
 }
 .card1>img{
     width: 100%;
@@ -327,4 +329,249 @@ margin-bottom: 30px;
     text-align: left;
     margin-bottom: 10px;
     cursor: pointer;
+}
+
+.pcard
+{
+    background: #FFF;
+    border-radius: 25px;
+   min-height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 300px;
+    box-shadow: 5px 5px 4px 3px #a5a5a5;
+}
+.cardHead
+{
+    margin-top: 1.3rem;
+    width: 100%;
+    color: white;
+    padding: 5px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+text-align: center;
+font-size: 1.2rem;
+font-family: 'Montserrat';
+font-weight: 800;
+margin-bottom: 1.5rem;
+}
+.points
+{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+
+}
+.cardel
+{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    color: #000;
+font-size: 0.95rem;
+
+font-weight: 400;
+}
+.cardel>img{
+    width: 15px;
+    object-fit: contain;
+    margin-right: 10px;
+
+}
+.cardPrice
+{
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    color: #000;
+text-align: center;
+font-size: 1rem;
+/* font-family: 'Montserrat'; */
+font-weight: 500;
+
+}
+.cardPrice>span
+{
+    color: #000;
+    text-align: center;
+    font-size: 2.3rem;
+    /* font-family: 'Montserrat'; */
+    font-weight: 800;
+}
+.priceBtn{
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 80%;
+    background: #FFF;
+    border-radius: 20px;
+    border: 1px solid black;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 400;
+padding:10px  0px ;
+}
+.priceBtn:hover
+{
+    color: grey;
+    background-color: #CCA23726;
+}
+.contact
+{
+    background: linear-gradient(270deg, #F5F3D4 0%, rgba(217, 217, 217, 0.47) 66.56%, rgba(217, 217, 217, 0.00) 100%);
+    display: flex;
+    height: 100vh;
+}
+.bgContact
+{
+    width: 50%;
+    height: 100vh;
+    background-image: -webkit-linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%);
+}
+.bgContact>img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+.conMain
+{
+width: 50%;
+padding: 20px 3%;
+display: flex;
+flex-direction: column;
+align-items: center;
+background-image: -webkit-linear-gradient(to left, rgb(123, 147, 27) 0%, rgb(231, 246, 98) 100%);
+}
+.contact1
+{
+    width: 82%;
+    display: flex;
+    justify-content:start ;
+    margin-bottom: 10px;
+    margin-top: 2rem;
+}
+.contact1>input
+{
+   
+    padding: 8px 10px;
+    border: 2px solid #4D2C23;
+    border-radius: 3px;
+    font-size: 1rem;
+    width: 46%;
+    background: transparent;
+    margin-right: auto;
+
+}
+.conMain>textarea
+{
+    width: 80%;
+    border: 2px solid #4D2C23;
+    border-radius: 3px;
+    min-height: 250px;
+    background: transparent;
+    margin-bottom: 10px;
+    padding: 8px 5px;
+    font-size: 1rem;
+}
+.conSend
+{
+    margin-top: 1.0rem;
+    border-radius: 10px;
+    border: 2px solid #4D2C23;
+    background: rgba(204, 162, 55, 0.43);
+    color: #7E440F;
+    text-align: center;
+    font-size: 1rem;
+    font-family: 'Montserrat';
+    font-weight: 800;
+    width: 150px;
+    padding: 10px 0px;
+    margin-right: auto;
+}
+.conSend:hover
+{
+    background: rgba(204, 162, 55, 0.048);
+cursor: pointer;
+}
+.faq
+{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+}
+.faqbg
+{
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    overflow: hidden;
+    background-color: #000;
+    z-index: -1;
+}
+.faqbg>img{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+}
+.faqe
+{
+    width: 85%;
+    border-radius: 10px;
+    border: 1px solid #FFF;
+    background: rgba(0, 0, 0, 0.40);
+    padding: 5px 20px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3vh;
+    
+
+}
+.ques
+{
+color: #FFF;
+font-size: 1.5rem;
+font-family: 'Montserrat';
+font-weight: 600;
+width: 100%;
+padding: 9px 0px;
+display: flex;
+
+}
+.qimg
+{
+    margin-left: auto;
+}
+.qimg>img{
+    width: 20px;
+    object-fit: contain;
+    margin-right: auto;
+}
+.ans
+{
+    margin-top: 1rem;
+    color: #FFF;
+font-size: 1.3rem;
+font-weight: 400;
+width: 90%;
+white-space: 0.4rem;
+padding-bottom: 15px;
+}
+.faqSec
+{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    gap: 20px;
+    width: 90%;
+    align-items: baseline;
 }
