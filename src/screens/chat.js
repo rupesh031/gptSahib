@@ -9,10 +9,10 @@ function ChatPage() {
   const [user, Setuser] = useState({});
   const [menu, setMenu] = useState(false);
   const history = [
-    { head: " Searched lorespusmfsafsafsafsa" },
-    { head: " Searched lorespusmfsafsafsafsa" },
-    { head: " Searched lorespusmfsafsafsafsa" },
-    { head: " Searched lorespusmfsafsafsafsa" },
+    // { head: " Searched lorespusmfsafsafsafsa" },
+    // { head: " Searched lorespusmfsafsafsafsa" },
+    // { head: " Searched lorespusmfsafsafsafsa" },
+    // { head: " Searched lorespusmfsafsafsafsa" },
   ];
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -58,16 +58,20 @@ function ChatPage() {
           <img src="images/new.png"></img>
           New question
         </div>
-        <div className={style.his}>
-          {history.map((ele) => {
-            return (
-              <div className={style.prev}>
-                <img src="images/msg.png"></img>
-                {ele.head}
-              </div>
-            );
-          })}
-        </div>
+        {history.length != 0 ? (
+          <div className={style.his}>
+            {history.map((ele) => {
+              return (
+                <div className={style.prev}>
+                  <img src="images/msg.png"></img>
+                  {ele.head}
+                </div>
+              );
+            })(<></>)}
+          </div>
+        ) : (
+          <></>
+        )}
 
         <div className={style.bottom}>
           <div className={style.ul}></div>
@@ -75,7 +79,13 @@ function ChatPage() {
             <img src="images/ac.png"></img>
             {user.name}
           </div>
-          <div className={style.prof}>
+
+          <div
+            className={style.prof}
+            onClick={() => {
+              window.location = "/#pricing";
+            }}
+          >
             <img src="images/upgrade.png" style={{ height: "15px" }}></img>
             Upgrade Account
           </div>

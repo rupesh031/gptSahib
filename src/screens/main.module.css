@@ -573,5 +573,6 @@ padding-bottom: 15px;
     margin-top: 2rem;
     gap: 20px;
     width: 90%;
-    align-items: baseline;
+    align-items: center;
+
 }

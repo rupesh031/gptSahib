@@ -24,7 +24,7 @@ function Main() {
 
   const cards2 = [
     {
-      head: "Amature",
+      head: "Amateur",
       points: [
         "Basic learning of language",
         "Phrases of Guru Granth Sahib Ji",
@@ -57,13 +57,13 @@ function Main() {
       ],
       color: "#CCA237",
       path: "images/t3.png",
-      price: ["65$", "Per year"],
+      price: ["70$", "Per year"],
     },
   ];
 
   const faqL = [
     {
-      ques: "what is GPT Sahib ?",
+      ques: "What is GPT Sahib ?",
       ans: "It is an AI chat bot that answers your questions and helps college and school students to learn punjabi.",
     },
     {
