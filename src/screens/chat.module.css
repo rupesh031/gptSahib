@@ -46,7 +46,7 @@ width: 30px;
     height: 80vh;
     display: flex;
     flex-direction: column;
-    border: 1px solid white;
+    /* border: 1px solid white; */
     background: transparent;
    
 }
@@ -82,6 +82,8 @@ width: 30px;
 .ans
 {
     margin-top: 1rem;
+    display: flex;
+    align-items: center;
 }
 .hr{
     margin-top: 1rem;
@@ -89,16 +91,19 @@ width: 30px;
     height: 1px;
     background-color: #FFFFFF;
 }
-.ans>img
+/* .ans>img
 {
     width: 40px;
     height: 40px;
     object-fit: contain;
-    margin-left: 5px;
+    margin-left: 0px;
    margin-right: 20px;
 
+} */
+.ans>img{
+    scale: 1.5;
 }
-.query>img {
+.query>img , .ans>img{
     width: 20px;
     height: 20px;
     object-fit: contain;

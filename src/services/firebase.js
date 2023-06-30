@@ -147,16 +147,14 @@ export const fetchHistory = async ({ userId, setSideBar }) => {
     const userRef = firestore.collection("users").doc(userId);
     const historyRef = userRef.collection("history");
 
-    const snapshot = await historyRef.get();
+    const snapshot = await historyRef.orderBy("timestamp", "desc").get();
     console.log(snapshot);
     if (snapshot.empty) {
-      // If no history document exists, create a new one
-      await historyRef.add({});
       setSideBar([]);
     } else {
       const documents = snapshot.docs.map((doc) => doc.data());
-
-      setSideBar(documents);
+      const documentList = Object.values(documents); // Convert the documents to an array
+      setSideBar(documentList);
     }
   } catch (error) {
     console.error("Error retrieving history:", error);
@@ -170,6 +168,8 @@ export const addHistory = async ({ userId, uid, data }) => {
     const historyRef = userRef.collection("history").doc(uid);
     await historyRef.set({
       data: data,
+      uid: uid,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     console.log("Document updated successfully");
   } catch (error) {
@@ -189,6 +189,7 @@ export const createHistory = async ({ uid, data, setNewChat, setCurrId }) => {
     await historyRef.set({
       data: data,
       uid: historyRef.id,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setCurrId(historyRef.id);
     localStorage.setItem("currId", historyRef.id);
@@ -252,20 +253,18 @@ function errorSet({ setError, errorCode }) {
   }
 }
 
-export const getResp = async ({ query, setError, getAns, setAns }) => {
+export const getResp = async ({ query, setError, setAns }) => {
   try {
-    // getAns({ answer: "dummy" });
-    // const response = await fetch("http://35.200.212.31:3400/ask", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Origin": "*",
-    //     mode: "no-cors",
-    //   },
-    //   body: JSON.stringify({ query: { query } }), // Replace with your actual payload
-    // });
-    // const responseData = await response.json();
-    // console.log(responseData);
+    const response = await fetch("http://35.200.212.31:3400/ask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({ query: { query } }),
+    });
+    const responseData = await response.json();
+    setAns(responseData.answer);
   } catch (error) {
     setError(error.message);
   }

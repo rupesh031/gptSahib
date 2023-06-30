@@ -19,22 +19,16 @@ function ChatPage() {
   const [currId, setCurr] = useState(null);
   const [history, setHistory] = useState([]);
 
-  const handleSendMessage = async () => {
+  const handleSendMessage = () => {
     if (inputValue.trim() !== "") {
       const updatedHistory = [...history, { query: inputValue, ans: "" }];
       setHistory(updatedHistory);
       setInputValue("");
-      await getResp({
-        query: inputValue,
-        setAns: setAns,
-        setError: setError,
-      });
-      getAns({ answer: "ans" });
+      getResp({ query: inputValue, setAns: setAns, setError: setError });
     }
   };
 
   useEffect(() => {
-    console.log("called");
     const id = localStorage.getItem("id");
     if (id != null && id != "")
       getUserByObjectId({
@@ -42,60 +36,70 @@ function ChatPage() {
         objectId: id,
         setSideBar: setSideBar,
       });
-
-    // localStorage.removeItem("currId");
-    // const chatid = localStorage.getItem("currId");
-    // if (chatid != null && chatid != "") {
-    //   setCurr(chatid);
-    // } else {
-    //   setNewChat(true);
-    // }
+    const chatid = localStorage.getItem("currId");
+    if (chatid != null && chatid != "") {
+      setCurr(chatid);
+    } else {
+      setNew();
+    }
   }, []);
 
-  // useEffect(() => {
-  //   if (currId != null) {
-  //     localStorage.setItem("currId", currId);
-  //   }
-  //   console.log(currId);
-  // }, [currId]);
+  useEffect(() => {
+    if (currId != null) {
+      localStorage.setItem("currId", currId);
+    }
+  }, [currId]);
 
-  const getAns = ({ answer }) => {
-    console.log("ger ans called");
-    console.log(answer);
-    if (history.length == 0) return;
-    const updatedHistory = [...history]; // Create a copy of the current history state
-    const lastEntryIndex = updatedHistory.length - 1;
-    const val = updatedHistory[lastEntryIndex];
-    val.ans = answer;
-    updatedHistory[lastEntryIndex] = val;
-    setHistory(updatedHistory);
-    // if (currId == null) {
-    //   createHistory({
-    //     uid: user.objectId,
-    //     data: updatedHistory, // Use the updatedHistory here
-    //     setCurrId: setCurr,
-    //     setNewChat: setNewChat,
-    //   });
-    //   // fetchHistory({ userId: user.objectId, setSideBar: setSideBar });
-    // } else {
-    //   addHistory({
-    //     userId: user.objectId,
-    //     uid: currId,
-    //     data: updatedHistory,
-    //   });
-    // }
-  };
+  useEffect(() => {
+    if (ans != null) {
+      const updatedHistory = [...history]; // Create a copy of the current history state
+      const lastEntryIndex = updatedHistory.length - 1;
+      const val = updatedHistory[lastEntryIndex];
+      val.ans = ans;
+      updatedHistory[lastEntryIndex] = val;
+      setHistory(updatedHistory);
 
-  useEffect(() => {}, [history]);
+      if (currId == null) {
+        createHistory({
+          uid: user.objectId,
+          data: updatedHistory, // Use the updatedHistory here
+          setCurrId: setCurr,
+          setNewChat: setNewChat,
+        });
+        // fetchHistory({ userId: user.objectId, setSideBar: setSideBar });
+      } else {
+        addHistory({
+          userId: user.objectId,
+          uid: currId,
+          data: updatedHistory,
+        });
+      }
+
+      setAns(null);
+    }
+  });
+
+  useEffect(() => {}, [history, sidebarHis]);
 
   const setNew = () => {
-    // localStorage.removeItem("currId");
-    // setCurr(null);
-    setNewChat(true);
+    if (currId != null) var a = 1;
+
+    fetchHistory({ userId: user.objectId, setSideBar: setSideBar });
+    localStorage.removeItem("currId");
+    setCurr(null);
     setHistory([]);
   };
+  const updateCurr = () => {
+    if (currId != null) {
+      var v = sidebarHis.find((x) => x.uid == currId);
+      if (v != null && v.data != null) setHistory(v.data);
+      else setHistory([]);
+    } else {
+      setHistory([]);
+    }
+  };
 
-  console.log(history);
+  console.log(sidebarHis);
   return (
     <div className={style.main}>
       {menu ? (
@@ -117,28 +121,34 @@ function ChatPage() {
           <img src="images/new.png"></img>
           New question
         </div>
-        {sidebarHis != [] &&
-        sidebarHis != null &&
-        sidebarHis.length &&
-        sidebarHis ? (
-          <div className={style.his}>
-            {/* {history.map((ele) => {
-              return (
+        {
+          Array.isArray(sidebarHis) && sidebarHis.length > 0 ? (
+            <div className={style.his}>
+              {sidebarHis.map((ele, index) => (
                 <div
                   className={style.prev}
                   onClick={() => {
+                    fetchHistory({
+                      userId: user.objectId,
+                      setSideBar: setSideBar,
+                    });
                     setCurr(ele.uid);
+                    updateCurr();
                   }}
+                  key={ele.uid}
+                  style={
+                    ele.uid == currId
+                      ? { border: "1px solid white", padding: "4px 7px" }
+                      : { padding: "4px 7px" }
+                  }
                 >
-                  <img src="images/msg.png"></img>
-                  {ele}
+                  <img src="images/msg.png" alt="message"></img>
+                  Chat {index}
                 </div>
-              );
-            })(<></>)} */}
-          </div>
-        ) : (
-          <></>
-        )}
+              ))}
+            </div>
+          ) : null // Alternatively, you can use null instead of <></> for the else condition
+        }
 
         <div className={style.bottom}>
           <div className={style.ul}></div>
