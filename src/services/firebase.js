@@ -96,7 +96,7 @@ export async function signInWithGoogle({ setSucess }) {
   }
 }
 
-export const getUserByObjectId = async ({ objectId, setUser }) => {
+export const getUserByObjectId = async ({ objectId, setUser, setSideBar }) => {
   try {
     const userRef = firebase.firestore().collection("users").doc(objectId);
     const userDoc = await userRef.get();
@@ -108,6 +108,7 @@ export const getUserByObjectId = async ({ objectId, setUser }) => {
         id: userDoc.id,
         ...userData,
       });
+      fetchHistory({ userId: userDoc.id, setSideBar: setSideBar });
     } else {
       setUser({ error: "User not found" });
       // throw new Error("User not found");
@@ -140,22 +141,61 @@ export const getHistory = async ({ objectId, setUser }) => {
   }
 };
 
-const fetchHistory = async ({ setHistory }) => {
+export const fetchHistory = async ({ userId, setSideBar }) => {
   try {
-    const snapshot = await firebase.firestore().collection("history").get();
-    const documents = snapshot.docs.map((doc) => doc.data());
-    setHistory(documents);
+    const firestore = firebase.firestore();
+    const userRef = firestore.collection("users").doc(userId);
+    const historyRef = userRef.collection("history");
+
+    const snapshot = await historyRef.get();
+    console.log(snapshot);
+    if (snapshot.empty) {
+      // If no history document exists, create a new one
+      await historyRef.add({});
+      setSideBar([]);
+    } else {
+      const documents = snapshot.docs.map((doc) => doc.data());
+
+      setSideBar(documents);
+    }
   } catch (error) {
     console.error("Error retrieving history:", error);
   }
 };
 
-const addHistory = async ({ uid, data }) => {
+export const addHistory = async ({ userId, uid, data }) => {
   try {
-    await firebase.firestore().collection("history").doc(uid).update(data);
+    const firestore = firebase.firestore();
+    const userRef = firestore.collection("users").doc(userId);
+    const historyRef = userRef.collection("history").doc(uid);
+    await historyRef.set({
+      data: data,
+    });
     console.log("Document updated successfully");
   } catch (error) {
     console.error("Error updating document:", error);
+  }
+};
+
+export const createHistory = async ({ uid, data, setNewChat, setCurrId }) => {
+  try {
+    const historyRef = firebase
+      .firestore()
+      .collection("users")
+      .doc(uid)
+      .collection("history")
+      .doc();
+
+    await historyRef.set({
+      data: data,
+      uid: historyRef.id,
+    });
+    setCurrId(historyRef.id);
+    localStorage.setItem("currId", historyRef.id);
+    setNewChat(false);
+    console.log("Document created successfully");
+  } catch (error) {
+    console.error("Error creating document:", error);
   }
 };
 
@@ -212,24 +252,20 @@ function errorSet({ setError, errorCode }) {
   }
 }
 
-export const getResp = async ({ query, setAns, setError }) => {
+export const getResp = async ({ query, setError, getAns, setAns }) => {
   try {
-    const response = await fetch("http://35.200.212.31:3400/ask", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        mode: "no-cors",
-      },
-      body: JSON.stringify({ query: { query } }), // Replace with your actual payload
-    });
-
-    if (!response.ok) {
-      throw new Error("Request failed");
-    }
-
-    const responseData = await response.json();
-    setAns(response.answer);
+    // getAns({ answer: "dummy" });
+    // const response = await fetch("http://35.200.212.31:3400/ask", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Access-Control-Allow-Origin": "*",
+    //     mode: "no-cors",
+    //   },
+    //   body: JSON.stringify({ query: { query } }), // Replace with your actual payload
+    // });
+    // const responseData = await response.json();
+    // console.log(responseData);
   } catch (error) {
     setError(error.message);
   }
