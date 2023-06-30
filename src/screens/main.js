@@ -245,7 +245,7 @@ function Main() {
             <input placeholder={"Email"}></input>
           </div>
           <textarea placeholder="Message"></textarea>
-          <div style={{ width: "80%" }}>
+          <div style={{ width: "80%", display: "flex" }}>
             <button className={style.conSend}>Send</button>
           </div>
         </div>

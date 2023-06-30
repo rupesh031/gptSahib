@@ -575,6 +575,128 @@ padding-bottom: 15px;
 
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
+.nav1>a{
+    display:none;
+}
+.signup{
+    display: none;
+}
+.content{
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+.con
+{
+    width: 90%;
+    font-size: 1.3rem;
+    line-height: 2rem;
+}
+.try
+{
+    margin-top: 5vh;
+    width: 100%;
+}
+.try2 ,.try1
+{
+    font-size: 1.2rem;
+}
+.cardSec
+{
+    width: 90%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 9vw;
+    overflow: auto;
+
+    padding: 4vh;
+    padding-top: 0px;
+
+    scroll-padding: 0px;
+    scrollbar-width: 0px;
+}
+
+
+.ans
+{
+    width: 95%;
+    font-size: 1.1rem;
+}
+.about
+{
+    background: #CCA237;
+    min-height: 100vh;
+    height: auto;
+}
+.content1
+{
+    margin-top: 5vh;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1rem;
+    height: fit-content;
+}
+.con1
+{
+    margin-top: 3vh;
+    font-size: 1.1rem;
+    line-height: 1.6rem;
+    margin-bottom: 7vh;
+}
+.faq
+{
+    height: auto;
+    min-height: 100vh;
+}
+.bgContact
+{
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+}
+.conMain
+{
+    width: 100%;
+}
+.contact1
+{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.contact1>input{
+    width: 45%;
     
+}
+.conMain>textarea
+{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.conSend
+{
+    margin-left: auto;
+    margin-right: auto;
+    background: rgba(204, 162, 55, 1);
+}
+.bot
+{
+    justify-content: center;
+    height: auto;
+    padding-bottom: 5vh;
+}
+.nlogo
+{
+   display: none;
+    
+}
+.nave
+{
+   
+}
 }

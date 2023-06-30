@@ -141,3 +141,16 @@ color: #C7711E;
   { color: rgba(126, 68, 15, 0.42);
 
   }
+
+  @media only screen and (max-width: 900px) {
+.sec1
+{
+    width: 0;
+}  
+.sec2
+{
+    width: 100%;
+}
+.google
+{}
+}

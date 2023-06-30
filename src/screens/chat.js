@@ -13,7 +13,7 @@ function ChatPage() {
   const [ans, setAns] = useState(null);
   const [error, setError] = useState(null);
   const [user, Setuser] = useState({});
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState(true);
   const [newChat, setNewChat] = useState(null);
   const [sidebarHis, setSideBar] = useState([]);
   const [currId, setCurr] = useState(null);
@@ -111,62 +111,73 @@ function ChatPage() {
           <img src="images/menu.png"></img>{" "}
         </div>
       ) : (
-        <></>
+        <div className={style.menu}>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {" "}
+            <div
+              className={style.close}
+              onClick={() => {
+                setMenu(!menu);
+              }}
+            >
+              <img src="images/new.png"></img>{" "}
+            </div>
+            <div className={style.new} onClick={() => setNew()}>
+              {" "}
+              <img src="images/new.png"></img>
+              New question
+            </div>
+          </div>
+
+          {
+            Array.isArray(sidebarHis) && sidebarHis.length > 0 ? (
+              <div className={style.his}>
+                {sidebarHis.map((ele, index) => (
+                  <div
+                    className={style.prev}
+                    onClick={() => {
+                      fetchHistory({
+                        userId: user.objectId,
+                        setSideBar: setSideBar,
+                      });
+                      setCurr(ele.uid);
+                      updateCurr();
+                    }}
+                    key={ele.uid}
+                    style={
+                      ele.uid == currId
+                        ? { border: "1px solid white", padding: "4px 7px" }
+                        : { padding: "4px 7px" }
+                    }
+                  >
+                    <img src="images/msg.png" alt="message"></img>
+                    Chat {index}
+                  </div>
+                ))}
+              </div>
+            ) : null // Alternatively, you can use null instead of <></> for the else condition
+          }
+
+          <div className={style.bottom}>
+            <div className={style.ul}></div>
+            <div className={style.prof}>
+              <img src="images/ac.png"></img>
+              {user.name}
+            </div>
+
+            <div
+              className={style.prof}
+              onClick={() => {
+                window.location = "/#pricing";
+              }}
+            >
+              <img src="images/upgrade.png" style={{ height: "15px" }}></img>
+              Upgrade Account
+            </div>
+          </div>
+        </div>
       )}
 
-      <div className={style.menu}>
-        <div className={style.new} onClick={() => setNew()}>
-          {" "}
-          <img src="images/new.png"></img>
-          New question
-        </div>
-        {
-          Array.isArray(sidebarHis) && sidebarHis.length > 0 ? (
-            <div className={style.his}>
-              {sidebarHis.map((ele, index) => (
-                <div
-                  className={style.prev}
-                  onClick={() => {
-                    fetchHistory({
-                      userId: user.objectId,
-                      setSideBar: setSideBar,
-                    });
-                    setCurr(ele.uid);
-                    updateCurr();
-                  }}
-                  key={ele.uid}
-                  style={
-                    ele.uid == currId
-                      ? { border: "1px solid white", padding: "4px 7px" }
-                      : { padding: "4px 7px" }
-                  }
-                >
-                  <img src="images/msg.png" alt="message"></img>
-                  Chat {index}
-                </div>
-              ))}
-            </div>
-          ) : null // Alternatively, you can use null instead of <></> for the else condition
-        }
-
-        <div className={style.bottom}>
-          <div className={style.ul}></div>
-          <div className={style.prof}>
-            <img src="images/ac.png"></img>
-            {user.name}
-          </div>
-
-          <div
-            className={style.prof}
-            onClick={() => {
-              window.location = "/#pricing";
-            }}
-          >
-            <img src="images/upgrade.png" style={{ height: "15px" }}></img>
-            Upgrade Account
-          </div>
-        </div>
-      </div>
       <div className={style.chatSec}>
         <div className={style.v1}>
           {" "}
@@ -204,6 +215,11 @@ function ChatPage() {
               setInputValue(e.target.value);
             }}
             value={inputValue}
+            onKeyDown={(e) => {
+              if (e.key == "Enter") {
+                handleSendMessage();
+              }
+            }}
           ></input>
           <img src="images/sent.png" onClick={handleSendMessage}></img>
         </div>
