@@ -82,7 +82,7 @@ function Main() {
   useEffect(() => {
     setLogin(localStorage.getItem("login"));
   }, [login]);
-  console.log(login);
+  //console.log(login);
 
   return (
     <div className={style.main}>

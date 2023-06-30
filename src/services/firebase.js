@@ -51,7 +51,7 @@ export async function signInWithEmailPassword(
   setError
 ) {
   try {
-    console.log("hello");
+    //console.log("hello");
     const userCredential = await firebase
       .auth()
       .signInWithEmailAndPassword(email, pass);
@@ -59,7 +59,7 @@ export async function signInWithEmailPassword(
     const user = userCredential.user;
     localStorage.setItem("id", user.uid);
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     errorSet({ setError: setError, errorCode: error.code });
     // throw error;
   }
@@ -91,7 +91,7 @@ export async function signInWithGoogle({ setSucess }) {
     setSucess(true);
     localStorage.setItem("id", user.uid);
   } catch (error) {
-    console.log(error.message);
+    //console.log(error.message);
     setSucess(false);
   }
 }
@@ -114,7 +114,7 @@ export const getUserByObjectId = async ({ objectId, setUser, setSideBar }) => {
       // throw new Error("User not found");
     }
   } catch (error) {
-    console.log(error.message);
+    //console.log(error.message);
     setUser({ error: error.message });
   }
 };
@@ -136,7 +136,7 @@ export const getHistory = async ({ objectId, setUser }) => {
       // throw new Error("User not found");
     }
   } catch (error) {
-    console.log(error.message);
+    //console.log(error.message);
     setUser({ error: error.message });
   }
 };
@@ -148,7 +148,7 @@ export const fetchHistory = async ({ userId, setSideBar }) => {
     const historyRef = userRef.collection("history");
 
     const snapshot = await historyRef.orderBy("timestamp", "desc").get();
-    console.log(snapshot);
+    //console.log(snapshot);
     if (snapshot.empty) {
       setSideBar([]);
     } else {
@@ -171,7 +171,7 @@ export const addHistory = async ({ userId, uid, data }) => {
       uid: uid,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
-    console.log("Document updated successfully");
+    //console.log("Document updated successfully");
   } catch (error) {
     console.error("Error updating document:", error);
   }
@@ -194,7 +194,7 @@ export const createHistory = async ({ uid, data, setNewChat, setCurrId }) => {
     setCurrId(historyRef.id);
     localStorage.setItem("currId", historyRef.id);
     setNewChat(false);
-    console.log("Document created successfully");
+    //console.log("Document created successfully");
   } catch (error) {
     console.error("Error creating document:", error);
   }
@@ -206,7 +206,7 @@ export const sendPasswordResetEmail = ({ email, setError }) => {
     .sendPasswordResetEmail(email)
     .then(() => {
       setError("Password reset email sent successfully");
-      // console.log("Password reset email sent successfully");
+      // //console.log("Password reset email sent successfully");
     })
     .catch((error) => {
       // console.error("Error sending password reset email:", error);
@@ -255,7 +255,7 @@ function errorSet({ setError, errorCode }) {
 
 export const getResp = async ({ query, setError, setAns }) => {
   try {
-    const response = await fetch("http://35.200.212.31:3400/ask", {
+    const response = await fetch("http://34.131.248.15:3400/ask", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

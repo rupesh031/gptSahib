@@ -25,7 +25,7 @@ function Login() {
       localStorage.setItem("login", "true");
       window.location = "/";
     }
-    console.log(error);
+    //console.log(error);
   }, [sucess, error]);
   return (
     <div className={style.main}>

@@ -99,7 +99,6 @@ function ChatPage() {
     }
   };
 
-  console.log(sidebarHis);
   return (
     <div className={style.main}>
       {menu ? (
