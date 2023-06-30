@@ -211,3 +211,26 @@ function errorSet({ setError, errorCode }) {
       break;
   }
 }
+
+export const getResp = async ({ query, setAns, setError }) => {
+  try {
+    const response = await fetch("http://35.200.212.31:3400/ask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        mode: "no-cors",
+      },
+      body: JSON.stringify({ query: { query } }), // Replace with your actual payload
+    });
+
+    if (!response.ok) {
+      throw new Error("Request failed");
+    }
+
+    const responseData = await response.json();
+    setAns(response.answer);
+  } catch (error) {
+    setError(error.message);
+  }
+};

@@ -1,34 +1,26 @@
 import React, { useEffect, useState } from "react";
 import style from "./chat.module.css";
-import { getUserByObjectId } from "../services/firebase";
+import { getResp, getUserByObjectId } from "../services/firebase";
 
 function ChatPage() {
-  const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
-
+  const [ans, setAns] = useState(null);
+  const [error, setError] = useState(null);
   const [user, Setuser] = useState({});
   const [menu, setMenu] = useState(false);
-  const history = [
-    // { head: " Searched lorespusmfsafsafsafsa" },
-    // { head: " Searched lorespusmfsafsafsafsa" },
-    // { head: " Searched lorespusmfsafsafsafsa" },
-    // { head: " Searched lorespusmfsafsafsafsa" },
-  ];
+  const [sidebarHis, setSideBar] = useState([]);
+  const [history, setHistory] = useState([]);
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
   const handleSendMessage = () => {
     if (inputValue.trim() !== "") {
-      const newMessage = {
-        id: messages.length,
-        content: inputValue,
-        sender: "user",
-      };
-
-      setMessages([...messages, newMessage]);
+      history.push({ query: inputValue, ans: "" });
+      setHistory(history);
+      console.log(history);
       setInputValue("");
-      // Call API or function to handle ChatGPT's response here
+      getResp({ query: inputValue, setAns: setAns, setError: setError });
     }
   };
   useEffect(() => {
@@ -36,6 +28,22 @@ function ChatPage() {
     if (id != null && id != "")
       getUserByObjectId({ setUser: Setuser, objectId: id });
   }, []);
+
+  useEffect(() => {
+    if (ans != null) {
+      if (history.length != 0) {
+        const updatedHistory = [...history];
+        const val = updatedHistory[updatedHistory.length - 1];
+        updatedHistory[updatedHistory.length - 1] = {
+          query: val.query,
+          ans: ans,
+        };
+        setHistory(updatedHistory);
+        //post history
+      }
+    }
+  }, [ans]);
+  useEffect(() => {}, [history]);
 
   return (
     <div className={style.main}>
@@ -58,9 +66,9 @@ function ChatPage() {
           <img src="images/new.png"></img>
           New question
         </div>
-        {history.length != 0 ? (
+        {sidebarHis.length != 0 ? (
           <div className={style.his}>
-            {history.map((ele) => {
+            {sidebarHis.map((ele) => {
               return (
                 <div className={style.prev}>
                   <img src="images/msg.png"></img>
@@ -94,15 +102,41 @@ function ChatPage() {
       <div className={style.chatSec}>
         <div className={style.v1}>
           {" "}
-          <div className={style.empty}>
-            Try using the AI chatbot for comprehending Guru Granth Sahib Ji and
-            learning of Sikh culture and language
-          </div>
+          {history.length == 0 ? (
+            <div className={style.empty}>
+              Try using the AI chatbot for comprehending Guru Granth Sahib Ji
+              and learning of Sikh culture and language
+            </div>
+          ) : (
+            <div className={style.chats}>
+              {history.map((val, id) => {
+                return (
+                  <div className={style.qele} key={id}>
+                    <div className={style.query}>
+                      {" "}
+                      <img src="images/acc.png"></img> {val.query}{" "}
+                    </div>
+                    <div className={style.hr}></div>
+                    <div className={style.ans}>
+                      {" "}
+                      <img src="images/logo.png"></img> {val.ans}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         <div className={style.cinput}>
-          <input placeholder="Send a message"></input>
-          <img src="images/sent.png"></img>
+          <input
+            placeholder="Send a message"
+            onChange={(e) => {
+              setInputValue(e.target.value);
+            }}
+            value={inputValue}
+          ></input>
+          <img src="images/sent.png" onClick={handleSendMessage}></img>
         </div>
       </div>
     </div>
