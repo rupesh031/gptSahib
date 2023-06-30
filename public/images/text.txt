@@ -1,0 +1,88 @@
+from datetime import datetime, time, timedelta
+from starlette.middleware.base import BaseHTTPMiddleware
+from fastapi import Request
+from fastapi.middleware.cors import CORSMiddleware
+from langchain.vectorstores import Chroma
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.llms import OpenAI
+from langchain.chains import RetrievalQA
+from langchain.document_loaders import PyPDFLoader
+from typing import List
+from langchain.schema import Document
+import os
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+# Add the Genie class and its dependencies here
+
+
+
+os.environ['OPENAI_API_KEY'] =  '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'
+
+def application(environ, start_response):
+  if environ['REQUEST_METHOD'] == 'OPTIONS':
+    start_response(
+      '200 OK',
+      [
+        ('Content-Type', 'application/json'),
+        ('Access-Control-Allow-Origin', '*'),
+        ('Access-Control-Allow-Headers', 'Authorization, Content-Type'),
+        ('Access-Control-Allow-Methods', 'POST'),
+      ]
+    )
+    return ''
+
+class Genie:
+
+    def __init__(self, file_path: str):
+        self.file_path = file_path
+        self.loader = PyPDFLoader(self.file_path)
+        self.documents = self.loader.load()
+        self.texts = self.text_split(self.documents)
+        self.vectordb = self.embeddings(self.texts)
+        self.genie = RetrievalQA.from_chain_type(llm=OpenAI(), chain_type="stuff", retriever=self.vectordb.as_retriever())
+
+    @staticmethod
+    def text_split(documents: PyPDFLoader):
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+        texts = text_splitter.split_documents(documents)
+        return texts
+
+    @staticmethod
+    def embeddings(texts: List[Document]):
+        embeddings = OpenAIEmbeddings()
+        vectordb = Chroma.from_documents(texts, embeddings)
+        return vectordb
+
+    def ask(self, query: str):
+        return self.genie.run(query)
+
+
+genie = Genie("Siri Guru Granth.pdf")
+
+
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost", "http://34.131.248.15:3400/ask" ,"http://34.131.248.15:3400"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["*"],
+)
+
+ 
+
+class Query(BaseModel):
+    query: str
+
+@app.post("/ask")
+def ask_question(query: Query):
+    response = genie.ask(query.query)
+    return {"answer": response}
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the API!"}

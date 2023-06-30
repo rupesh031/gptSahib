@@ -171,7 +171,6 @@ export const addHistory = async ({ userId, uid, data }) => {
       uid: uid,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
-    //console.log("Document updated successfully");
   } catch (error) {
     console.error("Error updating document:", error);
   }
@@ -259,9 +258,8 @@ export const getResp = async ({ query, setError, setAns }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify({ query: { query } }),
+      body: JSON.stringify({ query: query }),
     });
     const responseData = await response.json();
     setAns(responseData.answer);
