@@ -2,6 +2,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import { toast } from "react-toastify";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCPmQngpOEGe8NCFAPdraSSxkH7ogstc6w",
   authDomain: "gptsahib-e26ab.firebaseapp.com",

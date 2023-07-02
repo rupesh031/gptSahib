@@ -4,6 +4,7 @@ import Card1 from "./card1";
 import { Link } from "react-router-dom";
 import PricingCard from "./card2";
 import Faq from "./faq";
+import { Carousel } from "flowbite-react";
 
 function Main() {
   const [login, setLogin] = useState();
