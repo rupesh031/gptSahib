@@ -1,6 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import { toast } from "react-toastify";
 const firebaseConfig = {
   apiKey: "AIzaSyCPmQngpOEGe8NCFAPdraSSxkH7ogstc6w",
   authDomain: "gptsahib-e26ab.firebaseapp.com",
@@ -25,7 +26,7 @@ export async function signUpWithEmailPassword({
       .createUserWithEmailAndPassword(email, password);
 
     await sendEmailVerification();
-    setError("Verify Mail");
+    toast("Verification Link sent to " + email);
     const user = userCredential.user;
     await createUserDocument(user.uid, name, email);
     setSucess(true);
@@ -40,7 +41,7 @@ export async function sendEmailVerification() {
     const user = firebase.auth().currentUser;
     await user.sendEmailVerification();
   } catch (error) {
-    throw error;
+    toast.error(error);
   }
 }
 
@@ -204,7 +205,7 @@ export const sendPasswordResetEmail = ({ email, setError }) => {
     .auth()
     .sendPasswordResetEmail(email)
     .then(() => {
-      setError("Password reset email sent successfully");
+      toast.success("Reset Link sent to " + email);
       // //console.log("Password reset email sent successfully");
     })
     .catch((error) => {
@@ -216,45 +217,47 @@ export const sendPasswordResetEmail = ({ email, setError }) => {
 function errorSet({ setError, errorCode }) {
   switch (errorCode) {
     case "auth/invalid-email":
-      setError("Invalid email address.");
+      toast.error("Invalid email address.");
       break;
     case "auth/user-disabled":
-      setError("This user account has been disabled.");
+      toast.error("This user account has been disabled.");
       break;
     case "auth/user-not-found":
-      setError("User not found.");
+      toast.error("User not found.");
       break;
     case "auth/wrong-password":
-      setError("Incorrect password.");
+      toast.error("Incorrect password.");
       break;
     case "auth/email-already-in-use":
-      setError("Email address is already in use.");
+      toast.error("Email address is already in use.");
       break;
     case "auth/weak-password":
-      setError("The password is too weak.");
+      toast.error("The password is too weak.");
       break;
     case "auth/popup-closed-by-user":
-      setError("The sign-in popup was closed by the user.");
+      toast.error("The sign-in popup was closed by the user.");
       break;
     case "auth/popup-blocked":
-      setError("The sign-in popup was blocked by the browser.");
+      toast.error("The sign-in popup was blocked by the browser.");
       break;
     case "auth/operation-not-supported-in-this-environment":
-      setError("This operation is not supported in the current environment.");
+      toast.error(
+        "This operation is not supported in the current environment."
+      );
       break;
     case "auth/invalid-verification-code":
-      setError("The verification code is invalid.");
+      toast.error("The verification code is invalid.");
       break;
 
     default:
-      setError(errorCode);
+      toast.error(errorCode);
       break;
   }
 }
 
 export const getResp = async ({ query, setError, setAns }) => {
   try {
-    const response = await fetch("https://34.131.138.247:3400/ask", {
+    const response = await fetch("http://35.200.212.31:3400/ask", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

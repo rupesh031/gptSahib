@@ -6,6 +6,7 @@ import {
   signInWithEmailPassword,
   signInWithGoogle,
 } from "../services/firebase";
+import { ToastContainer, toast } from "react-toastify";
 
 function Login() {
   const [email, setEmail] = useState();
@@ -18,7 +19,7 @@ function Login() {
   const emailLog = async () => {
     if (email != "" && pass != "")
       await signInWithEmailPassword(email, pass, setSucess, setError);
-    else setError("Invalid Creds");
+    else toast("Invalid Creds");
   };
   useEffect(() => {
     if (sucess) {

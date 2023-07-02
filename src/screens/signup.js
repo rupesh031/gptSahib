@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "./login.module.css";
 import { Link } from "react-router-dom";
 import { signUpWithEmailPassword } from "../services/firebase";
+import { toast } from "react-toastify";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -12,9 +13,9 @@ function Signup() {
   const [sucess, setSucess] = useState(false);
 
   const submit = () => {
-    if (name == "") setError("Name Required");
-    else if (email == "") setError("Email Required");
-    else if (pass != conf || pass.length == 0) setError("Passwords Invalid");
+    if (name == "") toast.error("Name Required");
+    else if (email == "") toast.error("Email Required");
+    else if (pass != conf || pass.length == 0) toast.error("Passwords Invalid");
     else {
       //firebase Signup
       setError("");
