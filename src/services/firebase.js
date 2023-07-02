@@ -258,7 +258,7 @@ function errorSet({ setError, errorCode }) {
 
 export const getResp = async ({ query, setError, setAns }) => {
   try {
-    const response = await fetch("http://35.200.212.31:3400/ask", {
+    const response = await fetch("http://34.131.248.15:3400/ask", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
