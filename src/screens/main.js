@@ -4,10 +4,104 @@ import Card1 from "./card1";
 import { Link } from "react-router-dom";
 import PricingCard from "./card2";
 import Faq from "./faq";
-import { Carousel } from "flowbite-react";
+import "./cookie.css";
 
 function Main() {
   const [login, setLogin] = useState();
+  const [showCookiePopup, setShowCookiePopup] = useState(false);
+
+  const handlePopupOpen = () => {
+    setShowCookiePopup(!showCookiePopup);
+  };
+  const CookiePopup = () => {
+    return (
+      <div className="cookie-popup">
+        <div className="cookie-content">
+          <h2>Cookie and Privacy Policy</h2>
+          <p>
+            Effective Date: 04-07-23
+            <br />
+            <br />
+            This{" "}
+            <span style={{ color: "blue", fontWeight: "bold" }}>
+              Cookie and Privacy Policy
+            </span>{" "}
+            explains how we collect, use, and protect your personal information
+            when you visit and interact with our website. By accessing or using
+            our website, you consent to the terms outlined in this policy.
+            <br />
+            <br />
+            1. Information Collection and Use:
+            <br />
+            a. Personal Information: We may collect personal information, such
+            as your name, email address, or contact details when you voluntarily
+            provide them to us for purposes such as subscribing to our
+            newsletter or participating in discussions.
+            <br />
+            b. Cookies and Tracking Technologies: We use cookies and similar
+            tracking technologies to enhance your browsing experience, analyze
+            website traffic, and customize content. These technologies may
+            collect anonymous information such as IP address, browser type, and
+            pages visited.
+            <br />
+            c. Usage Data: We may collect non-personal information about your
+            interactions with our website, including the date and time of your
+            visit, the pages you access, and the duration of your stay.
+            <br />
+            <br />
+            2. Information Sharing:
+            <br />
+            a. We respect your privacy and will not sell, rent, or disclose your
+            personal information to third parties, except as required by law or
+            with your explicit consent.
+            <br />
+            b. We may engage trusted third-party service providers to assist us
+            in delivering our services, subject to their agreement to maintain
+            the confidentiality and security of your personal information.
+            <br />
+            <br />
+            3. Data Security:
+            <br />
+            a. We implement appropriate technical and organizational measures to
+            protect your personal information from unauthorized access,
+            disclosure, or alteration.
+            <br />
+            b. While we strive to maintain the security of your information,
+            please note that no method of transmission over the internet or
+            electronic storage is 100% secure.
+            <br />
+            <br />
+            4. External Links:
+            <br />
+            Our website may contain links to external websites or resources that
+            are not controlled or operated by us. This Cookie and Privacy Policy
+            does not apply to those third-party websites, and we encourage you
+            to review their respective privacy policies.
+            <br />
+            <br />
+            5. Changes to the Policy:
+            <br />
+            We reserve the right to update or modify this Cookie and Privacy
+            Policy at any time. We encourage you to review this policy
+            periodically for any changes.
+            <br />
+            <br />
+            If you have any questions, concerns, or requests regarding your
+            personal information or this policy, please contact us through the
+            provided contact details on our website.
+          </p>
+          <button className="close-button" onClick={handlePopupOpen}>
+            Close
+          </button>
+        </div>
+      </div>
+    );
+  };
+  const socialLinks = [
+    { img: "images/fb.png", link: "https://www.facebook.com/" },
+    { img: "images/insta.png", link: "https://www.instagram.com/" },
+    { img: "images/tw.png", link: "https://www.twitter.com/" },
+  ];
   const cardsl = [
     {
       header: "Guru Granth Sahib Ji",
@@ -68,7 +162,7 @@ function Main() {
   const faqL = [
     {
       ques: "What is GPT Sahib ?",
-      ans: "It is an AI chat bot that answers your questions and helps college and school students to learn punjabi.",
+      ans: "GPT Sahib offers comprehensive knowledge on Guru Granth Sahib and Sikh history. Explore teachings, historical events, biographies, articles, discussions, and resources, providing a deeper understanding of Sikhism's core principles and promoting interfaith dialogue.",
     },
     {
       ques: "Why is learning easy ?",
@@ -193,7 +287,9 @@ function Main() {
             GPT Sahib offers an interactive platform for individuals from
             diverse backgrounds to explore and understand Sikhism. It provides
             accurate and insightful responses to queries about the sacred texts,
-            historical events, and principles of the faith. Additionally, GPT
+            historical events, and principles of the faith. It can also be used
+            as a tool for individuals seeking spiritual guidance to live a
+            better life and cope with mental health issues. Additionally, GPT
             Sahib serves as an educational resource for learning Punjabi,
             enabling users to engage with Sikh teachings in their original
             language. The chatbot's ultimate goal is to promote inclusivity,
@@ -222,36 +318,6 @@ function Main() {
         </div>
       </div>
 
-      <div id="contact" className={style.contact}>
-        <div className={style.bgContact}>
-          {" "}
-          <img src="images/contact.png"></img>
-        </div>
-        <div className={style.conMain}>
-          <div
-            className={style.header}
-            style={{
-              marginTop: "80px",
-              color: "#7E440F",
-              textShadow: "none",
-              fontSize: "40px",
-              textAlign: "center",
-            }}
-          >
-            {" "}
-            Contact
-          </div>
-          <div className={style.contact1}>
-            <input placeholder={"Name"}></input>
-            <input placeholder={"Email"}></input>
-          </div>
-          <textarea placeholder="Message"></textarea>
-          <div style={{ width: "80%", display: "flex" }}>
-            <button className={style.conSend}>Send</button>
-          </div>
-        </div>
-      </div>
-
       <div className={style.faq} id="faq">
         <div className={style.faqbg}>
           <img src="images/faq.png"></img>
@@ -275,7 +341,82 @@ function Main() {
           })}
         </div>
       </div>
+      <div id="contact" className={style.contact}>
+        <div className={style.bgContact}>
+          {" "}
+          <img src="images/contact.png"></img>
+          <div></div>
+        </div>
+        <div className={style.newCon}>
+          {" "}
+          <div className={style.conLog}>
+            <div className={style.coninfo}>
+              <div className={style.conele}>
+                {" "}
+                <img src="images/call.png"></img>+91 00000 00000
+              </div>
+              <div className={style.conele}>
+                <img src="images/mail.png"></img>gptsahib03@gmail.com
+              </div>
+            </div>
+            <div className={style.hr}></div>
+            <div className={style.social}>
+              {socialLinks.map((val) => {
+                return (
+                  <a href={val.link}>
+                    {" "}
+                    <img src={val.img} className={style.links}></img>{" "}
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+          <div className={style.conMain}>
+            <div
+              className={style.header}
+              style={{
+                color: "white",
+                textShadow: "none",
 
+                fontWeight: "800px",
+                textAlign: "center",
+              }}
+            >
+              {" "}
+              CONTACT US
+            </div>
+
+            <div className={style.contact1}>
+              <input placeholder={"Full Name"}></input>
+              <input placeholder={"Email Address"}></input>
+              <textarea placeholder="Message"></textarea>
+              <div className={style.try1} style={{}}>
+                Send <img src="images/up.png"></img>
+              </div>
+              {/* <div className={style.hr}></div> */}
+              <div className={style.social}>
+                {socialLinks.map((val) => {
+                  return (
+                    <a href={val.link}>
+                      {" "}
+                      <img src={val.img} className={style.links}></img>{" "}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            ></div>
+          </div>
+        </div>
+      </div>
+      {showCookiePopup && <CookiePopup />}
       <div className={style.bot}>
         <div className={style.nlogo}>
           <img src="images/logo1.png"></img>
@@ -293,6 +434,9 @@ function Main() {
           <a href={login == true || login == "true" ? "/chat" : "/login"}>
             Try Free
           </a>
+        </div>
+        <div className={style.privacy} onClick={handlePopupOpen}>
+          Privacy Policy
         </div>
       </div>
     </div>
