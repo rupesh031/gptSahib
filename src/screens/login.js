@@ -61,7 +61,7 @@ function Login() {
             if (email != null && email.length != 0) {
               sendPasswordResetEmail({ email: email, setError: setError });
             } else {
-              setError("Please provide the email field");
+              toast("Please provide the email field");
             }
           }}
         >
