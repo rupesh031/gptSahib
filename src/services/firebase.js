@@ -258,13 +258,16 @@ function errorSet({ setError, errorCode }) {
 
 export const getResp = async ({ query, setError, setAns }) => {
   try {
-    const response = await fetch("http://0.0.0.0:3400/ask", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ query: query }),
-    });
+    const response = await fetch(
+      "https://asia-south1-hidden-cosmos-391410.cloudfunctions.net/function-2",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query: query }),
+      }
+    );
     const responseData = await response.json();
     setAns(responseData.answer);
   } catch (error) {

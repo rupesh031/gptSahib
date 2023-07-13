@@ -183,8 +183,33 @@ function ChatPage() {
           {" "}
           {history == [] || history == null || history.length == 0 ? (
             <div className={style.empty}>
-              Try using the AI chatbot for comprehending Guru Granth Sahib Ji
-              and learning of Sikh culture and language
+              <div className={style.emptHeader}>GPT SAHIB</div>
+              <div className={style.emptyIns}>
+                {" "}
+                <img src="images/ins.png"></img> <br></br>
+                Instructions
+              </div>
+              <div className={style.emptyEle}>
+                Feel free to ask questions related to Sikh History or seek
+                guidance on Mental Health concerns.{" "}
+              </div>
+              <div className={style.emptyEle}>
+                For example, if you're experiencing negative thoughts or a lack
+                of self-confidence, the chatbot can provide answers and support
+                based on teachings from the Guru Granth Sahib Ji.{" "}
+              </div>
+              <div className={style.emptyEle}>
+                Use clear and concise language to help the chatbot understand
+                your query more accurately and provide a relevant response.
+              </div>
+              <div className={style.emptyEle}>
+                Avoid asking general or unrelated questions and remember to use
+                appropriate language and a respectful tone.
+              </div>
+              <div className={style.emptyEle}>
+                Limit personal and sensitive information: To ensure your privacy
+                and safety
+              </div>
             </div>
           ) : (
             <div className={style.chats}>

@@ -289,7 +289,50 @@ margin-bottom: 10px;
     object-fit: contain;
     margin-right: 10px;
 }
-
+.empty
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:flex-start ;
+    margin-top: 5vh;
+    height: 90vh;
+    overflow-y: auto;
+}
+.emptHeader
+{
+    color: #FFF;
+text-align: center;
+/* font-family: "Montserrat"; */
+font-size: 2rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+margin-bottom: 5vh;
+}
+.emptyEle
+{
+    width: min(80%,700px);
+    padding: 20px 20px;
+    background: rgba(245, 245, 245, 0.03);
+    color: rgba(255, 255, 255, 0.55);
+    text-align: left;
+font-family: "Montserrat";
+font-size: 1rem;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+margin-bottom: 20px;
+}
+.emptyIns
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 10px;
+    margin-bottom: 25px;
+}
 @media only screen and (max-width: 900px) {
 .menu
 {
@@ -300,5 +343,15 @@ margin-bottom: 10px;
 .cinput
 {
     width: 80%;
+    
+}
+.empty
+{
+    margin-top: 1vh;
+    width: 95%;
+}
+.emptyEle
+{
+    width: 90%;
 }
 }
